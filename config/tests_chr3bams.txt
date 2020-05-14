@@ -1,0 +1,2 @@
+A90G_chr3 A90G_T_chr3part.bam A90G_N_chr3part.bam
+A90H_chr3 A90H_T_chr3part.bam A90H_N_chr3part.bam

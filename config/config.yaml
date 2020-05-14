@@ -1,0 +1,55 @@
+#### Basic analysis parameters ####
+analysisMode: 'TN'  # TN, TO, germline, de_novo
+callers:            # available callers: svaba, breakdancer, delly, manta
+- svaba
+- breakdancer
+- delly
+- manta
+
+runMode:
+  callAndAnnotate: no
+  callOnly: yes
+  annotateOnly: no
+refGenome: 'refGenomes/hg19_canonical_correct_chr_order.fa'
+genomeBuild: 'hg19'  # hg19 (chr) or b37 (no chr)
+   # consider pulling from ref genome file or dict index?
+
+
+#### Annotation parameters ####
+annotateFile: #'/DCEG/CGF/Bioinformatics/Production/Bari/Struct_var_pipeline_dev/snake_tests/chr5_list_output_test/SV_files_for_annotation.txt'
+annotationParams:
+  interchromPadding: 50
+  insertionPadding: 500
+  crossCallerOverlap: 0.7
+  genomicContextOverlap: 0.7
+  publicDataOverlap: 0.7
+
+
+#### Samples to analyze ####
+inFile: 'config/tests_chr3bams.txt'  # for testing TN
+
+
+#### Directories ####
+inDir: 'data'
+execDir: 'MoCCA-SV'  # where the snakefiles are
+outDir: 'output'
+logDir: 'output/logs'  # logs has to be uder output
+tempDir: 'tmp'
+
+
+#### Cluster parameters ####
+# clusterMode: 'qsub -V -j y -o /efs/test/mocca-tn-output/logs' 
+# clusterMode: 'qsub -V -S /bin/sh -q seq-calling.q -o /DCEG/CGF/Bioinformatics/Production/Bari/Struct_var_pipeline_dev/test_TN_smaller/logs -j y'
+clusterMode: 'local' # 'qsub -V  -o logs -j y'
+latency: 600
+maxNumJobs: 40
+maxThreads:
+- 4
+- 1
+- 1
+- 4
+
+
+#### Caller-specific parameters ####
+# Consider adding a user-configurable command line for each caller?
+
