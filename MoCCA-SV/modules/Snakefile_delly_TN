@@ -42,8 +42,8 @@ rule delly_create_tsv:
         n = get_normal_bam_container
     singularity: 'shub://bballew/NGS_singularity_recipes:samtools_1-9'
     shell:
-        '{params.path}create_tsv.sh {params.t} tumor {output};'
-        '{params.path}create_tsv.sh {params.n} control {output}'
+        '. {params.path}create_tsv.sh {params.t} tumor {output};'
+        '. {params.path}create_tsv.sh {params.n} control {output}'
     # tab-delimited sample description file where the first column is the sample id (as in the VCF/BCF file) and the second column is either tumor or control
 
 rule delly_pre_filter:
@@ -83,7 +83,7 @@ rule delly_list_output_files:
     params:
         path = execDir + 'scripts/'
     shell:
-        '{params.path}list_files.sh {input} {wildcards.sample} > {output}'
+        '. {params.path}list_files.sh {input} {wildcards.sample} > {output}'
 
 rule delly_merge_list:
     input:

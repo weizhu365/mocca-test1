@@ -161,11 +161,15 @@ rule manta_list_output_files:
     input:
         mantaWkngDir + '{sample}/results/variants/somaticSV.vcf.gz'
     output:
-        temp(parentDir + 'SV_files_for_annotation_manta.{sample}.txt')
+        parentDir + 'SV_files_for_annotation_manta.{sample}.txt'
     params:
         path = execDir + 'scripts/'
+    # singularity: 'shub://bballew/NGS_singularity_recipes:manta_1-4-0'
     shell:
-        '{params.path}list_files.sh {input} {wildcards.sample} > {output}'
+        #'pwd; ls -al; cat ./MoCCA-SV/scripts/list_files.sh; ls -al ./MoCCA-SV/scripts; which bash; echo $SHELL; df -h '
+        '. {params.path}list_files.sh {input} {wildcards.sample} > {output}'
+        #'/exec/scripts/list_files.sh {input} {wildcards.sample} > {output}'
+        #'./MoCCA-SV/scripts/list_files.sh {input} {wildcards.sample} > {output}'
 
 rule manta_merge_list:
     input:
